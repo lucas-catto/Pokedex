@@ -1,0 +1,3 @@
+
+Criar o Projeto MVC
+dotnet new mvc -o Pokedex
