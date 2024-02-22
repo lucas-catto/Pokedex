@@ -12,7 +12,22 @@ public class HomeController : Controller {
     }
 
     public IActionResult Index () {
-        return View();
+
+        Pokemon pikachu = new Pokemon();
+        
+        pikachu.Numero = 25;
+        pikachu.Nome   = "Pikachu";
+        pikachu.Imagem = "img/pokemons/025.png";
+        pikachu.Tipo.Add("Elétrico");
+
+        Pokemon raichu = new () {
+            Numero = 26,
+            Nome   = "Raichu",
+            Imagem = "img/pokemons/026.png",
+            Tipo   = ["Elétrico"]
+        };
+
+        return View(raichu);
     }
 
     public IActionResult Privacy () {
