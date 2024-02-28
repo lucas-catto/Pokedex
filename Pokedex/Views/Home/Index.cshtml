@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Home";
+    var tipos = (List<Tipo>)ViewData["Tipos"];
 }
 
 <section class="pt-5 pb-3 text-center container">
@@ -9,25 +10,10 @@
         <div class="col mx-auto">
             <h1>Pokédex</h1>
             <div class="group">
-                <button id="btn-all" class="btn btn-md my-2 text-white bg-secondary btn-filter">Ver Todos</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#aab">Aço</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#39f">Água</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#76e">Dragão</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#fc3">Elétrico</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#e9e">Fada</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#66b">Fantasma</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#f42">Fogo</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#6cf">Gelo</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#ab6">Inseto</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#b54">Lutador</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#aa9">Normal</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#ba6">Pedra</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#7c5">Planta</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#f59">Psíquico</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#754">Sombrio</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#db5">Terrestre</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#a59">Venenoso</button>
-                <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:#89f">Voador</button>
+                <button id="btn-all" class="btn btn-md my-2 text-white bg-dark btn-filter">Ver Todos</button>
+                @foreach (var tipo in tipos) {
+                    <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:@tipo.Cor">@tipo.Nome</button>
+                }
             </div>
         </div>
     </div>
@@ -48,9 +34,11 @@
                             <h3 class="card-title">@pokemon.Nome</h3>
                 
                             <div class="btn-group">
-                                <a href="#" class="btn my-2 text-white" style="background-color:#7c5">@pokemon.Tipo[0]</a>
-                                @* <a href="#" class="btn my-2 text-white" style="background-color:#7c5">Planta</a> *@
-                                @* <a href="#" class="btn my-2 text-white" style="background-color:#a59">Venenoso</a> *@
+                            
+                                @foreach (var tipo in pokemon.Tipo) {
+
+                                    <a href="#" class="btn my-2 text-white" style="background-color:#7c5">@tipo</a>
+                                }
                             </div>
                             
                         </div>
