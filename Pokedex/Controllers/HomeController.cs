@@ -6,7 +6,10 @@ using Pokedex.Models;
 namespace Pokedex.Controllers;
 
 public class HomeController : Controller {
+    
     private readonly ILogger<HomeController> _logger;
+    private List<Pokemon> pokemons = [];
+    private List<Tipo> tipos = [];
 
     public HomeController(ILogger<HomeController> logger) {
         _logger = logger;
@@ -30,15 +33,11 @@ public class HomeController : Controller {
 
         // return View(raichu);
 
-        List<Pokemon> pokemons = [];
-
         using(StreamReader leitor = new("Data\\pokemons.json")) {
             
             string dados = leitor.ReadToEnd();
             pokemons     = JsonSerializer.Deserialize <List<Pokemon>>(dados);
         }
-
-        List<Tipo> tipos = [];
 
         using (StreamReader leitor = new("Data\\tipos.json")) {
             
@@ -51,8 +50,28 @@ public class HomeController : Controller {
         return View(pokemons);
     }
 
-    public IActionResult Privacy () {
-        return View();
+    public IActionResult Details (int id) {
+
+        using(StreamReader leitor = new("Data\\pokemons.json")) {
+            
+            string dados = leitor.ReadToEnd();
+            pokemons     = JsonSerializer.Deserialize <List<Pokemon>>(dados);
+        }
+
+        var pokemon = pokemons
+            .Where(p => p.Numero == id)
+            .FirstOrDefault();
+
+
+                using (StreamReader leitor = new("Data\\tipos.json")) {
+            
+            string dados = leitor.ReadToEnd();
+            tipos = JsonSerializer.Deserialize <List<Tipo>>(dados);
+        }
+
+        ViewData["Tipos"] = tipos;
+
+        return View(pokemon);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
