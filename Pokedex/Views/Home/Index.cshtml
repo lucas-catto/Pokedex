@@ -3,16 +3,27 @@
 @{
     ViewData["Title"] = "Home";
     var tipos = (List<Tipo>)ViewData["Tipos"];
+
+    string Cor (string nome) {
+        
+        return tipos
+            .Where(t => t.Nome == nome)
+            .Select(t => t.Cor)
+            .FirstOrDefault();
+    }
 }
 
 <section class="pt-5 pb-3 text-center container">
     <div class="row">
         <div class="col mx-auto">
+            
             <h1>Pokédex</h1>
+            
             <div class="group">
                 <button id="btn-all" class="btn btn-md my-2 text-white bg-dark btn-filter">Ver Todos</button>
+
                 @foreach (var tipo in tipos) {
-                    <button id="btn-aço" class="btn btn-sm my-2 text-white btn-filter" style="background-color:@tipo.Cor">@tipo.Nome</button>
+                    <button id="btn-@tipo.Nome" class="btn btn-sm my-2 text-white btn-filter" style="background-color:@tipo.Cor">@tipo.Nome</button>
                 }
             </div>
         </div>
@@ -37,7 +48,7 @@
                             
                                 @foreach (var tipo in pokemon.Tipo) {
 
-                                    <a href="#" class="btn my-2 text-white" style="background-color:#7c5">@tipo</a>
+                                    <a href="#" class="btn my-2 text-white" style="background-color:@Cor(tipo)">@tipo</a>
                                 }
                             </div>
                             
