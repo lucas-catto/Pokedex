@@ -5,7 +5,7 @@
 
 function filter (type) {
     
-    let cards;
+    let cards
     let i;
     let count;
 
@@ -20,22 +20,24 @@ function filter (type) {
             cards[i].parentElement.style.display = 'block';
             count++;
         }
-    }
+    };
     for (i = 0; i < buttons.length; i++) {
+
         if (buttons[i].id == `btn-${type}`) {
-            buttons.classList.remove("btn-sm");
-            buttons.classList.add("btn-md");
+
+            buttons[i].classList.remove("btn-sm");
+            buttons[i].classList.add("btn-md");
         }
         else {
-            buttons.classList.remove("btn-md");
-            buttons.classList.add("btn-sm");
+            buttons[i].classList.remove("btn-md");
+            buttons[i].classList.add("btn-sm");
         }
-    }
+    };
 
     if (type === "all") {
         document.getElementById("btn-all").classList.remove("btn-sm");
         document.getElementById("btn-all").classList.add("btn-md");
-    }
+    };
     if (count == 0) {
         document.getElementById("zeroPokemon").classList.remove("d-none");
     }
