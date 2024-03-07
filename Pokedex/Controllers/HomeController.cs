@@ -76,8 +76,14 @@ public class HomeController : Controller {
             .Where(p => p.Numero == id)
             .FirstOrDefault();
 
-        return View(pokemon);
+        DetailsVM details = new () {
+            Tipos    = tipos,
+            Atual    = pokemons.FirstOrDefault(p => p.Numero == id),
+            Anterior = pokemons.OrderByDescending(p => p.Numero).FirstOrDefault(p => p.Numero < id),
+            Proximo  = pokemons.OrderBy(p => p.Numero).FirstOrDefault(p => p.Numero > id),
+        };
         
+        return View(details);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
